@@ -8,5 +8,6 @@ An internal cheat for SCP - Containment Breach that only works on v1.3.11.
 
 You need an injector to inject the .dll into Containment Breach. I recommend the "Guided Hacking injector".
 
+You also need to compile the .dll yourself.
 
 Once you inject the .dll, a console window should pop up telling you the controls.
