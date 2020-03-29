@@ -129,7 +129,7 @@ DWORD WINAPI HackThread(HMODULE hModule)
 				std::cout << "5.Notarget disabled.     \n";
 			}
 
-			
+
 			if (bDebughud)
 			{
 				*(int*)mem::FindDMAAddy(moduleBase + 0xf5400, { 0x98, 0xad0 }) = 1;
@@ -200,4 +200,3 @@ void ShowConsoleCursor(bool showFlag)
 	cursorInfo.bVisible = showFlag; // set the cursor visibility
 	SetConsoleCursorInfo(out, &cursorInfo);
 }
-
