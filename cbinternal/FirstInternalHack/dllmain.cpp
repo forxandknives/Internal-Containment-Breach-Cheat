@@ -21,12 +21,12 @@ DWORD WINAPI HackThread(HMODULE hModule)
 	//calling it with NULL also gives you the address of the .exe module
 	moduleBase = (uintptr_t)GetModuleHandle(NULL);
 
-	bool bGodmode = false, bNoclip = false, bSprint = false, bBlink = false, bNotarget = false, bDebughud = false, bCamerafog = false;
+	bool bGodmode = false, bNoclip = false, bSprint = false, bBlink = false, bNotarget = false, bDebughud = false, bCamerafog = false, bReset = false;
 
 
 	while (true)
 	{
-		std::cout << "Press 1 for Godmode\nPress 2 for Noclip\nPress 3 for Unlimited Sprint\nPress 4 for Unlimited Blink\nPress 5 for Notarget\nPress 6 for Debughud\nPress 7 for No Camerafog\nPress end to uninject\n";
+		std::cout << "Press 1 for Godmode\nPress 2 for Noclip\nPress 3 for Unlimited Sprint\nPress 4 for Unlimited Blink\nPress 5 for Notarget\nPress 6 for Debughud\nPress 7 for No Camerafog\nPress 0 to reset everything\nPress end to uninject\n";
 
 
 
@@ -66,6 +66,11 @@ DWORD WINAPI HackThread(HMODULE hModule)
 		if (GetAsyncKeyState(0x37) & 1)
 		{
 			bCamerafog = !bCamerafog;
+		}
+
+		if (GetAsyncKeyState(0x30) & 1)
+		{
+			bReset = !bReset;
 		}
 
 		//need to use uintptr_t for pointer arithmetic later
@@ -154,6 +159,18 @@ DWORD WINAPI HackThread(HMODULE hModule)
 				std::cout << "7.Camerafog enabled.     \n";
 			}
 
+			if (bReset)
+			{
+				bGodmode = false;
+				bNoclip = false;
+				bSprint = false;
+				bBlink = false;
+				bNotarget = false;
+				bDebughud = false;
+				bCamerafog = false;
+				bReset = !bReset;
+			}
+
 			setCursorPosition(0, 0);
 		}
 		Sleep(5);
@@ -200,3 +217,4 @@ void ShowConsoleCursor(bool showFlag)
 	cursorInfo.bVisible = showFlag; // set the cursor visibility
 	SetConsoleCursorInfo(out, &cursorInfo);
 }
+
